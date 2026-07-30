@@ -1,0 +1,22 @@
+# env
+.env
+
+# generated data — can be large
+data/
+results/
+
+# node
+node_modules/
+
+# python
+__pycache__/
+*.pyc
+.venv/
+venv/
+*.egg-info/
+
+# editors
+.idea/
+.vscode/
+*.swp
+package-lock.json

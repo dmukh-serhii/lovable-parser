@@ -1,0 +1,36 @@
+{
+  "name": "lovable-parser",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "_python": "node -e \"process.stdout.write(process.platform==='win32'?'python':'python3')\"",
+    "fetch": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/fetch_domains.py',{stdio:'inherit'})\"",
+    "fetch:cc": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/fetch_domains.py --cc-only',{stdio:'inherit'})\"",
+    "fetch:wayback": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/fetch_domains.py --wayback-only',{stdio:'inherit'})\"",
+    "crawl": "node crawler/index.js",
+    "crawl:retry": "node crawler/index.js --retry",
+    "analyze": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/analyze.py',{stdio:'inherit'})\"",
+    "results": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/analyze.py --export-only',{stdio:'inherit'})\"",
+    "results:crawled": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/export_crawled.py',{stdio:'inherit'})\"",
+    "notify": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/notify.py',{stdio:'inherit'})\"",
+    "notify:test": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/notify.py --test',{stdio:'inherit'})\"",
+    "notify:reset": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/notify.py --reset',{stdio:'inherit'})\"",
+    "daily": "bash scripts/daily.sh",
+    "migrate": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' scripts/migrate_to_neon.py',{stdio:'inherit'})\"",
+    "admin": "npm --prefix admin run dev",
+    "admin:build": "npm --prefix admin run build",
+    "admin:start": "npm --prefix admin run start",
+    "stats": "node crawler/stats.js",
+    "stats:failed": "node crawler/stats.js --failed",
+    "test:apikey": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' test/test_apikey.py',{stdio:'inherit'})\"",
+    "test:crawl": "node test/test_crawl.js",
+    "test:analyze": "node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' test/test_analyze.py',{stdio:'inherit'})\"",
+    "test": "node test/test_crawl.js && node -e \"require('child_process').execSync((process.platform==='win32'?'python':'python3')+' test/test_analyze.py',{stdio:'inherit'})\"",
+    "test:pipeline": "node -e \"const{execSync}=require('child_process');execSync(process.platform==='win32'?'powershell -ExecutionPolicy Bypass -File test/test_pipeline.ps1':'bash test/test_pipeline.sh',{stdio:'inherit'})\""
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "pg": "^8.22.0",
+    "playwright": "^1.44.0"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "lovable-parser",
+  "main": ".open-next/worker.js",
+  "compatibility_date": "2025-03-01",
+  "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
+  "assets": {
+    "directory": ".open-next/assets",
+    "binding": "ASSETS"
+  },
+  "services": [
+    {
+      "binding": "WORKER_SELF_REFERENCE",
+      "service": "lovable-parser"
+    }
+  ],
+  // Screenshots are served directly from the R2 custom-domain CDN, not through
+  // the Worker — so no R2 binding here. IMG_DOMAIN is the public host the
+  // browser fetches images from (custom domain or pub-xxxx.r2.dev).
+  "vars": {
+    "IMG_DOMAIN": "pub-532a2529925e476890e72eb7bb528e06.r2.dev"
+  }
+  // Secrets (set with `wrangler secret put <NAME>`, never commit):
+  //   ADMIN_DATABASE_URL   read-only Neon role (admin_ro)
+  //   AUTH_SECRET          session cookie signing key
+  //   ADMIN_USER           login email
+  //   ADMIN_PASSWORD       login password
+  // Do NOT set CRAWLER_DATABASE_URL / DATABASE_URL here — keeping write creds
+  // off the deployment is what makes pipeline/refetch auto-return 501.
+}
